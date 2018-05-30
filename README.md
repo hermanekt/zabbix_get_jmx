@@ -38,6 +38,8 @@ optional arguments:
 ```
 zabbix_get_jmx --java-gateway-host HOST_WITH_INSTALLED_GW --java-gateway-port 10052 --jmx-server MONITORED_HOST --jmx-port 4447 --jmx-user USER --jmx-pass ZABBIX --new-protocol --key 'jmx.discovery[beans,"*:type=GarbageCollector,name=*"]' | jq '.data[0].value | fromjson | .data'
 ```
+Output:
+```
 [
   {
     "{#JMXDOMAIN}": "java.lang",
@@ -52,13 +54,15 @@ zabbix_get_jmx --java-gateway-host HOST_WITH_INSTALLED_GW --java-gateway-port 10
     "{#JMXNAME}": "PS Scavenge"
   }
 ]
-
+```
 
 ### Usage simple script
 * Test discovery Garbage collector
 ```
 ./zabbix_get_jmx.sh 'jmx.discovery[beans,"*:type=GarbageCollector,name=*"]'
 ```
+Output:
+```
 [
   {
     "{#JMXDOMAIN}": "java.lang",
@@ -73,3 +77,4 @@ zabbix_get_jmx --java-gateway-host HOST_WITH_INSTALLED_GW --java-gateway-port 10
     "{#JMXNAME}": "PS Scavenge"
   }
 ]
+```
