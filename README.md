@@ -2,7 +2,7 @@
 
 ### Install
 ```
-yum install python34
+yum install python34 jq -y
 ```
 ```
 wget https://raw.githubusercontent.com/hermanekt/zabbix_get_jmx/master/zabbix_get_jmx -P /usr/bin/
@@ -33,8 +33,43 @@ optional arguments:
   --jmx-pass JMX_PASS
   --new-protocol
 ```
+### Example zabbix_get_jmx
+** Test discovery Garbage collector **
+```
+zabbix_get_jmx --java-gateway-host HOST_WITH_INSTALLED_GW --java-gateway-port 10052 --jmx-server MONITORED_HOST --jmx-port 4447 --jmx-user USER --jmx-pass ZABBIX --new-protocol --key 'jmx.discovery[beans,"*:type=GarbageCollector,name=*"]' | jq '.data[0].value | fromjson | .data'
+```
+[
+  {
+    "{#JMXDOMAIN}": "java.lang",
+    "{#JMXTYPE}": "GarbageCollector",
+    "{#JMXOBJ}": "java.lang:type=GarbageCollector,name=PS MarkSweep",
+    "{#JMXNAME}": "PS MarkSweep"
+  },
+  {
+    "{#JMXDOMAIN}": "java.lang",
+    "{#JMXTYPE}": "GarbageCollector",
+    "{#JMXOBJ}": "java.lang:type=GarbageCollector,name=PS Scavenge",
+    "{#JMXNAME}": "PS Scavenge"
+  }
+]
+
 
 ### Usage easy script
 ** Test discovery Garbage collector **
+```
 ./zabbix_get_jmx.sh 'jmx.discovery[beans,"*:type=GarbageCollector,name=*"]'
-
+```
+[
+  {
+    "{#JMXDOMAIN}": "java.lang",
+    "{#JMXTYPE}": "GarbageCollector",
+    "{#JMXOBJ}": "java.lang:type=GarbageCollector,name=PS MarkSweep",
+    "{#JMXNAME}": "PS MarkSweep"
+  },
+  {
+    "{#JMXDOMAIN}": "java.lang",
+    "{#JMXTYPE}": "GarbageCollector",
+    "{#JMXOBJ}": "java.lang:type=GarbageCollector,name=PS Scavenge",
+    "{#JMXNAME}": "PS Scavenge"
+  }
+]
