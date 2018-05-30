@@ -29,6 +29,7 @@ def main():
   if args.new_protocol:
     conn = query.pop('conn')
     port = query.pop('port')
+    # Here you can change connection protocol
     query['jmx_endpoint'] = 'service:jmx:remote://%s:%s/' % (conn, port)
 
 
