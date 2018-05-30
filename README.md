@@ -54,8 +54,8 @@ zabbix_get_jmx --java-gateway-host HOST_WITH_INSTALLED_GW --java-gateway-port 10
 ]
 
 
-### Usage easy script
-** Test discovery Garbage collector **
+### Usage simple script
+* Test discovery Garbage collector
 ```
 ./zabbix_get_jmx.sh 'jmx.discovery[beans,"*:type=GarbageCollector,name=*"]'
 ```
