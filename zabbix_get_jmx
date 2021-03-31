@@ -30,8 +30,8 @@ def main():
     conn = query.pop('conn')
     port = query.pop('port')
     # Original jmx_endpoint
-    # query['jmx_endpoint'] = 'service:jmx:rmi:///jndi/rmi://%s:%s/jmxrmi' % (conn, port)
-    query['jmx_endpoint'] = 'service:jmx:remote://%s:%s/' % (conn, port)
+    query['jmx_endpoint'] = 'service:jmx:rmi:///jndi/rmi://%s:%s/jmxrmi' % (conn, port)
+    # query['jmx_endpoint'] = 'service:jmx:remote://%s:%s/' % (conn, port)
 
   query_str = json.dumps(query)
   query_len = len(query_str)
